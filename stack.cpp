@@ -1,5 +1,3 @@
-#include <iostream>
-#include "list.h"
 #include "stack.h"
 
 using namespace std;
@@ -34,5 +32,13 @@ void Stack::get()
         cout << "Элемент: " << current->data << endl;
         removeAt(Size - 1);
     }
+}
+
+void Stack::print(std::ostream&out)
+{
+    if (&out == &std::cout)
+        return List::print("->");
+    else
+        return List::print(" ", out);
 }
 
