@@ -2,7 +2,6 @@
 #include "list.h"
 #include "queue.h"
 #include "stack.h"
-#include "menu.h"
 #include <iostream>
 #include <fstream> // подключаем библиотеку
 #include <vector>
@@ -14,23 +13,23 @@ int main()
     setlocale(LC_ALL, "ru");
     ifstream file; // создаем объект класса ifstream
     ofstream out;
-    file.open("/Users/sofiakondrateva/Downloads/teh_prog_3/teh_prog_3/in.txt"); // открываем файл
-    out.open("/Users/sofiakondrateva/Downloads/teh_prog_3/teh_prog_3/out.txt");
-    if (!file)
+    file.open("/Users/sofiakondrateva/Downloads/teh_prog_3/teh_prog_3/in.txt", std::ifstream::in); // открываем файл
+    out.open("/Users/sofiakondrateva/Downloads/teh_prog_3/teh_prog_3/out.txt", std::ofstream::out);
+    if (!file.is_open())
     {
-        cout << "Файл не открыт\n\n";
+        cout << "Файл не открыт\n\n";
         return 1;
     }
-    vector<int> items;
+    List items;
     int item;
     for (file >> item; !file.eof(); file >> item)
         items.push_back(item);
+    std::cout << "FILE: ";
+    items.print();
     setlocale(LC_ALL, "Rus");
     int flag = 0, c;
     int ch;
     int fl = 0;
-    
-    ///////////////////////////////////////////////////////ÇÀÄÀÍÈÅ 11
     
     Queue queue;
     Stack stack;
@@ -48,8 +47,8 @@ int main()
             case 1:
                 while (fl != 1)
                 {
-                    cout << "Действия: " << endl;
-                    cout << "1 - Заполнить с файла" << endl;
+                    cout << "Действия: " << endl;
+                    cout << "1 - Заполнить с файла" << endl;
                     cout << "2 - Заполнить вручную" << endl;
                     cout << "3 - Извлечь значение" << endl;
                     cout << "4 - Просмотр" << endl;
@@ -75,32 +74,14 @@ int main()
                             queue.get();
                             break;
                         case 4:
-                            if (queue.GetSize() > 0)
-                            {
-                                for (int i = 0; i < queue.GetSize() - 1; i++)
-                                {
-                                    cout << queue[i] << "->";
-                                }
-                                cout << queue[queue.GetSize() - 1] << endl;
-                            } else {
-                                cout << "Пусто" << endl;
-                            }
+                            queue.print();
                             break;
                         case 5:
                             if (out.is_open())
                             {
-                                if (queue.GetSize() > 0)
-                                {
-                                    for (int i = 0; i < queue.GetSize() - 1; i++)
-                                    {
-                                        cout << queue[i] << "->";
-                                    }
-                                    cout << queue[queue.GetSize() - 1] << endl;
-                                } else {
-                                    cout << "Пусто" << endl;
-                                }
+                                queue.print(out);
                             } else {
-                                cout << "Не удалось открыть файл" << endl;
+                                cout << "Не удалось открыть файл" << endl;
                             }
                             break;
                         case 0:
@@ -114,8 +95,8 @@ int main()
             case 2:
                 while (fl != 1)
                 {
-                    cout << "Действия: " << endl;
-                    cout << "1 - Заполнить с файла" << endl;
+                    cout << "Действия: " << endl;
+                    cout << "1 - Заполнить с файла" << endl;
                     cout << "2 - Заполнить вручную" << endl;
                     cout << "3 - Извлечь значение" << endl;
                     cout << "4 - Просмотр" << endl;
@@ -133,6 +114,7 @@ int main()
                             break;
                         case 2:
                             int item;
+                            cout << "Введите значение: ";
                             cin >> item;
                             stack.push_front(item);
                             break;
@@ -140,32 +122,14 @@ int main()
                             stack.get();
                             break;
                         case 4:
-                            if (stack.GetSize() > 0)
-                            {
-                                for (int i = 0; i < stack.GetSize() - 1; i++)
-                                {
-                                    cout << stack[i] << "->";
-                                }
-                                cout << stack[stack.GetSize() - 1] << endl;
-                            } else {
-                                cout << "Пусто" << endl;
-                            }
+                            stack.print();
                             break;
                         case 5:
                             if (out.is_open())
                             {
-                                if (stack.GetSize() > 0)
-                                {
-                                    for (int i = 0; i < stack.GetSize() - 1; i++)
-                                    {
-                                        cout << stack[i] << "->";
-                                    }
-                                    cout << stack[stack.GetSize() - 1] << endl;
-                                } else {
-                                    cout << "Пусто" << endl;
-                                }
+                                stack.print(out);
                             } else {
-                                cout << "Не удалось открыть файл" << endl;
+                                cout << "Не удалось открыть файл" << endl;
                             }
                             break;
                         case 0:
