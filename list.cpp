@@ -76,6 +76,14 @@ void List::get()
     }
 }
 
+void List::print(const char* delim, ostream& out)
+{
+    for (int i = 0; i < Size; i++) {
+        out << this->operator[](i) << delim;
+    }
+    out << '\n';
+}
+
 void List::push_front(int data)
 {
     head = new Node(data, head);
