@@ -1,7 +1,7 @@
 #include "list.h"
 #include "queue.h"
 
-void Queue::push_front(int data)
+void Queue::push_front(int data) 
 {
     if (head == nullptr)
     {
@@ -15,4 +15,12 @@ void Queue::push_front(int data)
         current->pNext = new Node(data);
     }
     Size++;
+}
+
+void Queue::print(std::ostream& out)
+{
+    if (&out == &std::cout)
+        return List::print("<-");
+    else
+        return List::print(" ", out);
 }
